@@ -27,7 +27,7 @@
 
 from .api import parse
 from .datetimes import registerDateHandler
-from .exceptions import *
+from .exceptions import FeedparserError, CharacterEncodingOverride, CharacterEncodingUnknown, NonXMLContentType, UndeclaredNamespace
 from .util import FeedParserDict
 
 __author__ = 'Kurt McKee <contactme@kurtmckee.org>'

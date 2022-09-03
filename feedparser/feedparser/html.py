@@ -28,7 +28,7 @@
 import html.entities
 import re
 
-from .sgml import *
+from .sgml import sgmllib, charref, tagfind, attrfind, entityref, incomplete, interesting, shorttag, shorttagopen, starttagopen, endbracket
 
 _cp1252 = {
     128: '\u20ac',  # euro sign
