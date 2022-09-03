@@ -732,14 +732,14 @@ class HTMLSanitizer(BaseHTMLProcessor):
     }
 
     def __init__(self, encoding=None, _type='application/xhtml+xml'):
-        super().__init__(encoding, _type)
+        super(HTMLSanitizer, self).__init__(encoding, _type)
 
         self.unacceptablestack = 0
         self.mathmlOK = 0
         self.svgOK = 0
 
     def reset(self):
-        super().reset()
+        super(HTMLSanitizer, self).reset()
         self.unacceptablestack = 0
         self.mathmlOK = 0
         self.svgOK = 0
@@ -805,7 +805,7 @@ class HTMLSanitizer(BaseHTMLProcessor):
                 if key == 'href':
                     value = make_safe_absolute_uri(value)
                 clean_attrs.append((key, value))
-        super().unknown_starttag(tag, clean_attrs)
+        super(HTMLSanitizer, self).unknown_starttag(tag, clean_attrs)
 
     def unknown_endtag(self, tag):
         if tag not in self.acceptable_elements:
@@ -820,7 +820,7 @@ class HTMLSanitizer(BaseHTMLProcessor):
                     self.svgOK -= 1
             else:
                 return
-        super().unknown_endtag(tag)
+        super(HTMLSanitizer, self).unknown_endtag(tag)
 
     def handle_pi(self, text):
         pass
@@ -830,7 +830,7 @@ class HTMLSanitizer(BaseHTMLProcessor):
 
     def handle_data(self, text):
         if not self.unacceptablestack:
-            super().handle_data(text)
+            super(HTMLSanitizer, self).handle_data(text)
 
     def sanitize_style(self, style):
         # disallow urls
@@ -865,7 +865,7 @@ class HTMLSanitizer(BaseHTMLProcessor):
         return ' '.join(clean)
 
     def parse_comment(self, i, report=1):
-        ret = super().parse_comment(i, report)
+        ret = super(HTMLSanitizer, self).parse_comment(i, report)
         if ret >= 0:
             return ret
         # if ret == -1, this may be a malicious attempt to circumvent

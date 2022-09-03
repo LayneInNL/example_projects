@@ -121,7 +121,7 @@ class JSONHighlighter(RegexHighlighter):
     ]
 
     def highlight(self, text: Text) -> None:
-        super().highlight(text)
+        super(JSONHighlighter, self).highlight(text)
 
         # Additional work to handle highlighting JSON keys
         plain = text.plain

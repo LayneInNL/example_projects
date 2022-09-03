@@ -82,7 +82,7 @@ class RichHandler(Handler):
         log_time_format: Union[str, FormatTimeCallable] = "[%x %X]",
         keywords: Optional[List[str]] = None,
     ) -> None:
-        super().__init__(level=level)
+        super(RichHandler, self).__init__(level=level)
         self.console = console or get_console()
         self.highlighter = highlighter or self.HIGHLIGHTER_CLASS()
         self._log_render = LogRender(

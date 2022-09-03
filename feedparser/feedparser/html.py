@@ -91,11 +91,11 @@ class BaseHTMLProcessor(sgmllib.SGMLParser):
             self.encoding = encoding
         self._type = _type
         self.pieces = []
-        super().__init__()
+        super(BaseHTMLProcessor, self).__init__()
 
     def reset(self):
         self.pieces = []
-        super().reset()
+        super(BaseHTMLProcessor, self).reset()
 
     def _shorttag_replace(self, match):
         """
@@ -143,8 +143,8 @@ class BaseHTMLProcessor(sgmllib.SGMLParser):
         data = re.sub(r'<([^<>\s]+?)\s*/>', self._shorttag_replace, data)
         data = data.replace('&#39;', "'")
         data = data.replace('&#34;', '"')
-        super().feed(data)
-        super().close()
+        super(BaseHTMLProcessor, self).feed(data)
+        super(BaseHTMLProcessor, self).close()
 
     @staticmethod
     def normalize_attrs(attrs):

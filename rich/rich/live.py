@@ -20,7 +20,7 @@ class _RefreshThread(Thread):
         self.live = live
         self.refresh_per_second = refresh_per_second
         self.done = Event()
-        super().__init__(daemon=True)
+        super(_RefreshThread, self).__init__(daemon=True)
 
     def stop(self) -> None:
         self.done.set()

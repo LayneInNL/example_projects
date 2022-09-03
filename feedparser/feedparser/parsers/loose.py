@@ -34,7 +34,7 @@ class LooseXMLParser:
         self.lang = baselang or None
         self.encoding = encoding or 'utf-8'  # character encoding
         self.entities = entities or {}
-        super().__init__()
+        super(LooseXMLParser, self).__init__()
 
     @staticmethod
     def _normalize_attributes(kv):

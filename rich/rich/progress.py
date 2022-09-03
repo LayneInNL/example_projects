@@ -70,7 +70,7 @@ class _TrackThread(Thread):
         self.done = Event()
 
         self.completed = 0
-        super().__init__()
+        super(_TrackThread, self).__init__()
 
     def run(self) -> None:
         task_id = self.task_id
@@ -541,7 +541,7 @@ class RenderableColumn(ProgressColumn):
         self, renderable: RenderableType = "", *, table_column: Optional[Column] = None
     ):
         self.renderable = renderable
-        super().__init__(table_column=table_column)
+        super(RenderableColumn, self).__init__(table_column=table_column)
 
     def render(self, task: "Task") -> RenderableType:
         return self.renderable
@@ -571,7 +571,7 @@ class SpinnerColumn(ProgressColumn):
             if isinstance(finished_text, str)
             else finished_text
         )
-        super().__init__(table_column=table_column)
+        super(SpinnerColumn, self).__init__(table_column=table_column)
 
     def set_spinner(
         self,
@@ -614,7 +614,7 @@ class TextColumn(ProgressColumn):
         self.style = style
         self.markup = markup
         self.highlighter = highlighter
-        super().__init__(table_column=table_column or Column(no_wrap=True))
+        super(TextColumn, self).__init__(table_column=table_column or Column(no_wrap=True))
 
     def render(self, task: "Task") -> Text:
         _text = self.text_format.format(task=task)
@@ -652,7 +652,7 @@ class BarColumn(ProgressColumn):
         self.complete_style = complete_style
         self.finished_style = finished_style
         self.pulse_style = pulse_style
-        super().__init__(table_column=table_column)
+        super(BarColumn, self).__init__(table_column=table_column)
 
     def render(self, task: "Task") -> ProgressBar:
         """Gets a progress bar widget for a task."""
@@ -709,7 +709,7 @@ class TaskProgressColumn(TextColumn):
 
         self.text_format_no_percentage = text_format_no_percentage
         self.show_speed = show_speed
-        super().__init__(
+        super(TaskProgressColumn, self).__init__(
             text_format=text_format,
             style=style,
             justify=justify,
@@ -773,7 +773,7 @@ class TimeRemainingColumn(ProgressColumn):
     ):
         self.compact = compact
         self.elapsed_when_finished = elapsed_when_finished
-        super().__init__(table_column=table_column)
+        super(TimeRemainingColumn, self).__init__(table_column=table_column)
 
     def render(self, task: "Task") -> Text:
         """Show time remaining."""
@@ -834,7 +834,7 @@ class MofNCompleteColumn(ProgressColumn):
 
     def __init__(self, separator: str = "/", table_column: Optional[Column] = None):
         self.separator = separator
-        super().__init__(table_column=table_column)
+        super(MofNCompleteColumn, self).__init__(table_column=table_column)
 
     def render(self, task: "Task") -> Text:
         """Show completed/total."""
@@ -858,7 +858,7 @@ class DownloadColumn(ProgressColumn):
         self, binary_units: bool = False, table_column: Optional[Column] = None
     ) -> None:
         self.binary_units = binary_units
-        super().__init__(table_column=table_column)
+        super(DownloadColumn, self).__init__(table_column=table_column)
 
     def render(self, task: "Task") -> Text:
         """Calculate common unit for completed and total."""

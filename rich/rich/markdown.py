@@ -136,7 +136,7 @@ class Heading(TextElement):
     def __init__(self, level: int) -> None:
         self.level = level
         self.style_name = f"markdown.h{level}"
-        super().__init__()
+        super(Heading, self).__init__()
 
     def __rich_console__(
         self, console: Console, options: ConsoleOptions
@@ -324,12 +324,12 @@ class ImageItem(TextElement):
         self.destination = destination
         self.hyperlinks = hyperlinks
         self.link: Optional[str] = None
-        super().__init__()
+        super(ImageItem, self).__init__()
 
     def on_enter(self, context: "MarkdownContext") -> None:
         self.link = context.current_style.link
         self.text = Text(justify="left")
-        super().on_enter(context)
+        super(ImageItem, self).on_enter(context)
 
     def __rich_console__(
         self, console: Console, options: ConsoleOptions
