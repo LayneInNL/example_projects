@@ -629,17 +629,15 @@ class Traceback:
                         (f"\n{error}", "traceback.error"),
                     )
                 else:
-                    yield (
-                        Columns(
-                            [
-                                syntax,
-                                *render_locals(frame),
-                            ],
-                            padding=1,
-                        )
-                        if frame.locals
-                        else syntax
-                    )
+                    if frame.locals:
+                        _rest_part_of_list = render_locals(frame)
+                        _a_list = list()
+                        _a_list.append(syntax)
+                        _a_list.extend(_rest_part_of_list)
+                        _a_column = Columns(_a_list, padding=1)
+                        yield _a_column
+                    else:
+                        yield syntax
 
 
 if __name__ == "__main__":  # pragma: no cover
