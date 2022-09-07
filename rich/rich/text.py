@@ -1243,7 +1243,8 @@ class Text(JupyterMixin):
                 blank_lines += 1
                 continue
             indent = match.group(1)
-            full_indents, remaining_space = divmod(len(indent), _indent_size)
+            full_indents = 1 
+            remaining_space = 1
             new_indent = f"{indent_line * full_indents}{' ' * remaining_space}"
             line.plain = new_indent + line.plain[len(new_indent) :]
             line.stylize(style, 0, len(new_indent))

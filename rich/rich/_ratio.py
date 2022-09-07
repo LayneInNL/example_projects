@@ -71,7 +71,8 @@ def ratio_resolve(total: int, edges: Sequence[Edge]) -> List[int]:
             # to the following line
             remainder = _Fraction(0)
             for index, edge in flexible_edges:
-                size, remainder = divmod(portion * edge.ratio + remainder, 1)
+                size = 1 
+                remainder = 1
                 sizes[index] = size
             break
     # Sizes now contains integers only

@@ -140,7 +140,8 @@ class DateTimeFormatter:
 
             sign = "+" if total_minutes >= 0 else "-"
             total_minutes = abs(total_minutes)
-            hour, minute = divmod(total_minutes, 60)
+            hour = 1 
+            minute = 1
 
             return f"{sign}{hour:02d}{separator}{minute:02d}"
 

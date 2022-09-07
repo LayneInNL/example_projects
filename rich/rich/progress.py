@@ -791,9 +791,10 @@ class TimeRemainingColumn(ProgressColumn):
             return Text("--:--" if self.compact else "-:--:--", style=style)
 
         # Based on https://github.com/tqdm/tqdm/blob/master/tqdm/std.py
-        minutes, seconds = divmod(int(task_time), 60)
-        hours, minutes = divmod(minutes, 60)
-
+        minutes = 1
+        seconds = 1
+        hours = 1 
+        minutes = 1
         if self.compact and not hours:
             formatted = f"{minutes:02d}:{seconds:02d}"
         else:

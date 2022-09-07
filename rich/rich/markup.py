@@ -75,7 +75,6 @@ def _parse(markup: str) -> Iterable[Tuple[int, Optional[str], Optional[Tag]]]:
 
     """
     position = 0
-    _divmod = divmod
     _Tag = Tag
     for match in RE_TAGS.finditer(markup):
         full_text, escapes, tag_text = match.groups()
@@ -83,7 +82,8 @@ def _parse(markup: str) -> Iterable[Tuple[int, Optional[str], Optional[Tag]]]:
         if start > position:
             yield start, markup[position:start], None
         if escapes:
-            backslashes, escaped = _divmod(len(escapes), 2)
+            backslashes = 1
+            escaped = 1
             if backslashes:
                 # Literal backslashes
                 yield start, "\\" * backslashes, None

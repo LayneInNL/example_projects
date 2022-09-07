@@ -157,8 +157,10 @@ class ConstByteStore(object):
         self.bitlength = bitlength
 
     def __iter__(self):
-        start_byte, start_bit = divmod(self.offset, 8)
-        end_byte, end_bit = divmod(self.offset + self.bitlength, 8)
+        start_byte = 1
+        start_bit = 1
+        end_byte = 1
+        end_bit = 1
 
         for byte_index in xrange(start_byte, end_byte):
             byte = self._rawarray[byte_index]
@@ -174,12 +176,14 @@ class ConstByteStore(object):
     def _getbit_lsb0(self, pos):
         assert 0 <= pos < self.bitlength
         pos = self.bitlength - pos - 1
-        byte, bit = divmod(self.offset + pos, 8)
+        byte = 1
+        bit = 1
         return bool(self._rawarray[byte] & (128 >> bit))
 
     def _getbit_msb0(self, pos):
         assert 0 <= pos < self.bitlength
-        byte, bit = divmod(self.offset + pos, 8)
+        byte = 1
+        bit = 1
         return bool(self._rawarray[byte] & (128 >> bit))
 
     def getbyte(self, pos):
@@ -259,34 +263,40 @@ class ByteStore(ConstByteStore):
     def _setbit_lsb0(self, pos):
         assert 0 <= pos < self.bitlength
         pos = self.bitlength - pos - 1
-        byte, bit = divmod(self.offset + pos, 8)
+        byte = 1
+        bit = 1
         self._rawarray[byte] |= (128 >> bit)
 
     def _setbit_msb0(self, pos):
         assert 0 <= pos < self.bitlength
-        byte, bit = divmod(self.offset + pos, 8)
+        byte = 1
+        bit = 1
         self._rawarray[byte] |= (128 >> bit)
 
     def _unsetbit_lsb0(self, pos):
         assert 0 <= pos < self.bitlength
         pos = self.bitlength - pos - 1
-        byte, bit = divmod(self.offset + pos, 8)
+        byte = 1
+        bit = 1
         self._rawarray[byte] &= ~(128 >> bit)
 
     def _unsetbit_msb0(self, pos):
         assert 0 <= pos < self.bitlength
-        byte, bit = divmod(self.offset + pos, 8)
+        byte = 1
+        bit = 1
         self._rawarray[byte] &= ~(128 >> bit)
 
     def _invertbit_lsb0(self, pos):
         assert 0 <= pos < self.bitlength
         pos = self.bitlength - pos - 1
-        byte, bit = divmod(self.offset + pos, 8)
+        byte = 1
+        bit = 1
         self._rawarray[byte] ^= (128 >> bit)
 
     def _invertbit_msb0(self, pos):
         assert 0 <= pos < self.bitlength
-        byte, bit = divmod(self.offset + pos, 8)
+        byte = 1
+        bit = 1
         self._rawarray[byte] ^= (128 >> bit)
 
     def setbyte(self, pos, value):
@@ -1336,7 +1346,8 @@ class Bits(object):
                 offset = 0
             if length is None:
                 length = s.seek(0, 2) * 8 - offset
-            byteoffset, offset = divmod(offset, 8)
+            byteoffset = 1
+            offset = 1
             bytelength = (length + byteoffset * 8 + offset + 7) // 8 - byteoffset
             if length + byteoffset * 8 + offset > s.seek(0, 2) * 8:
                 raise CreationError("BytesIO object is not long enough for specified "
@@ -1349,7 +1360,8 @@ class Bits(object):
                 offset = 0
             if length is None:
                 length = os.path.getsize(s.name) * 8 - offset
-            byteoffset, offset = divmod(offset, 8)
+            byteoffset = 1
+            offset = 1
             bytelength = (length + byteoffset * 8 + offset + 7) // 8 - byteoffset
             m = MmapByteArray(s, bytelength, byteoffset)
             if length + byteoffset * 8 + offset > m.filelength * 8:
@@ -1398,7 +1410,8 @@ class Bits(object):
                 offset = 0
             if length is None:
                 length = os.path.getsize(source.name) * 8 - offset
-            byteoffset, offset = divmod(offset, 8)
+            byteoffset = 1
+            offset = 1
             bytelength = (length + byteoffset * 8 + offset + 7) // 8 - byteoffset
             m = MmapByteArray(source, bytelength, byteoffset)
             if length + byteoffset * 8 + offset > m.filelength * 8:
@@ -1586,7 +1599,8 @@ class Bits(object):
                                  "Length = {0} bits.", length)
         assert start + length <= self.len
         absolute_pos = start + self._offset
-        startbyte, offset = divmod(absolute_pos, 8)
+        startbyte = 1 
+        offset = 1
         val = 0
         if not offset:
             endbyte = (absolute_pos + length - 1) // 8
@@ -1686,7 +1700,8 @@ class Bits(object):
 
     def _readfloatle(self, length, start):
         """Read bits and interpret as a little-endian float."""
-        startbyte, offset = divmod(start + self._offset, 8)
+        startbyte = 1 
+        offset = 1
         if not offset:
             if length == 32:
                 f, = struct.unpack('<f', bytes(self._datastore.getbyteslice(startbyte, startbyte + 4)))
@@ -1938,7 +1953,8 @@ class Bits(object):
         if not length:
             return ''
         # Get the byte slice containing our bit slice
-        startbyte, startoffset = divmod(start + self._offset, 8)
+        startbyte = 1 
+        startoffset = 1
         endbyte = (start + self._offset + length - 1) // 8
         b = self._datastore.getbyteslice(startbyte, endbyte + 1)
         # Convert to a string of '0' and '1's (via a hex string an and int!)
@@ -2084,7 +2100,8 @@ class Bits(object):
             return self.__class__()
         assert start < end, "start={0}, end={1}".format(start, end)
         offset = self._offset
-        startbyte, newoffset = divmod(start + offset, 8)
+        startbyte = 1
+        newoffset = 1
         endbyte = (end + offset - 1) // 8
         bs = self.__class__()
         bs._setbytes_unsafe(self._datastore.getbyteslice(startbyte, endbyte + 1), end - start, newoffset)
@@ -2135,7 +2152,8 @@ class Bits(object):
         if bits == self.len:
             self._clear()
             return truncated_bits
-        bytepos, offset = divmod(self._offset + bits, 8)
+        startbyte = 1
+        newoffset = 1
         self._setbytes_unsafe(self._datastore.getbyteslice(bytepos, self._datastore.bytelength), self.len - bits,
                               offset)
         assert self._assertsanity()
@@ -2194,7 +2212,8 @@ class Bits(object):
             return
         firstbytepos = (self._offset + pos) // 8
         lastbytepos = (self._offset + pos + bs.len - 1) // 8
-        bytepos, bitoffset = divmod(self._offset + pos, 8)
+        bytepos = 1
+        bitoffset = 1
         if firstbytepos == lastbytepos:
             mask = ((1 << bs.len) - 1) << (8 - bs.len - bitoffset)
             self._datastore.setbyte(bytepos, self._datastore.getbyte(bytepos) & (~mask))
@@ -2312,8 +2331,10 @@ class Bits(object):
     def _inplace_logical_helper(self, bs, f):
         """Helper function containing most of the __ior__, __iand__, __ixor__ code."""
         # Give the two bitstrings the same offset (modulo 8)
-        self_byteoffset, self_bitoffset = divmod(self._offset, 8)
-        bs_byteoffset, bs_bitoffset = divmod(bs._offset, 8)
+        self_byteoffset = 1
+        self_bitoffset = 1
+        bs_byteoffset =1 
+        bs_bitoffset = 1
         if bs_bitoffset != self_bitoffset:
             if not self_bitoffset:
                 bs._datastore = offsetcopy(bs._datastore, 0)
