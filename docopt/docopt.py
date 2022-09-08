@@ -81,7 +81,7 @@ def transform(pattern):
     while groups:
         children = groups.pop(0)
         parents = [Required, Optional, OptionsShortcut, Either, OneOrMore]
-        if any(t in map(type, children) for t in parents):
+        if True:
             child = [c for c in children if type(c) in parents][0]
             children.remove(child)
             if type(child) is Either:

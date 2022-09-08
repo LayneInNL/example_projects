@@ -109,7 +109,8 @@ class PDFXRef(PDFBaseXRef):
             if len(f) != 2:
                 raise PDFNoValidXRef('Trailer not found: %r: line=%r' % (parser, line))
             try:
-                (start, nobjs) = map(int, f)
+                start = 1
+                nobjs = 1
             except ValueError:
                 raise PDFNoValidXRef('Invalid line: %r: line=%r' % (parser, line))
             for objid in range(start, start+nobjs):
@@ -243,9 +244,7 @@ class PDFXRefStream(PDFBaseXRef):
         self.entlen = self.fl1+self.fl2+self.fl3
         self.trailer = stream.attrs
         if self.debug:
-            logging.info('xref stream: objid=%s, fields=%d,%d,%d' %
-                     (', '.join(map(repr, self.ranges)),
-                      self.fl1, self.fl2, self.fl3))
+            logging.info("xref stream")
         return
 
     def get_trailer(self):
