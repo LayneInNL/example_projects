@@ -854,7 +854,7 @@ class Bits(object):
                 return auto
         except TypeError:
             pass
-        x = super(Bits, cls).__new__(cls)
+        x = object.__new__(cls)
         x._datastore = ConstByteStore(b'')
         x._initialise(auto, length, offset, **kwargs)
         return x
@@ -3082,7 +3082,7 @@ class BitArray(Bits):
             self._ensureinmemory()
 
     def __new__(cls, auto=None, length=None, offset=None, **kwargs):
-        x = super(BitArray, cls).__new__(cls)
+        x = Bits.__new__(cls)
         y = Bits.__new__(BitArray, auto, length, offset, **kwargs)
         x._datastore = ByteStore(y._datastore._rawarray[:],
                                           y._datastore.bitlength,
@@ -3776,7 +3776,7 @@ class ConstBitStream(Bits):
         pass
 
     def __new__(cls, auto=None, length=None, offset=None, pos=0, **kwargs):
-        x = super(ConstBitStream, cls).__new__(cls)
+        x = Bits.__new__(cls)
         x._initialise(auto, length, offset, **kwargs)
         x._pos = x._datastore.bitlength + pos if pos < 0 else pos
         if x._pos < 0 or x._pos > x._datastore.bitlength:
@@ -4110,7 +4110,7 @@ class BitStream(ConstBitStream, BitArray):
             self._ensureinmemory()
 
     def __new__(cls, auto=None, length=None, offset=None, pos=0, **kwargs):
-        x = super(BitStream, cls).__new__(cls)
+        x = ConstBitStream.__new__(cls)
         y = ConstBitStream.__new__(BitStream, auto, length, offset, pos, **kwargs)
         x._datastore = ByteStore(y._datastore._rawarray[:],
                                           y._datastore.bitlength,
