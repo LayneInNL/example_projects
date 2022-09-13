@@ -48,12 +48,9 @@ from .timezones import utc as UTC
 from .timezones import Local
 from .util import Fail, err, expand_line, parse_host_list
 
-try:
-    import urllib.request as urllib2
-    import http.client as httplib
-except ImportError:
-    import urllib2
-    import httplib
+
+import urllib.request as urllib2
+import http.client as httplib
 
 
 # T-Archiver (Twitter-Archiver) application registered by @stalkr_

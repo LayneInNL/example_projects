@@ -10,17 +10,12 @@ except ImportError:
 else:
     _HAVE_SSL = True
 
-try:
-    import urllib.request as urllib_request
-    import urllib.error as urllib_error
-except ImportError:
-    import urllib2 as urllib_request
-    import urllib2 as urllib_error
 
-try:
-    from cStringIO import StringIO
-except ImportError:
-    from io import BytesIO as StringIO
+import urllib.request as urllib_request
+import urllib.error as urllib_error
+
+
+from io import BytesIO as StringIO
 
 from .twitter_globals import POST_ACTIONS
 from .auth import NoAuth

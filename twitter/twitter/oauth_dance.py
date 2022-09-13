@@ -7,10 +7,7 @@ from .api import Twitter, json
 from .oauth import OAuth, write_token_file
 from .oauth2 import OAuth2, write_bearer_token_file
 
-try:
-    _input = raw_input
-except NameError:
-    _input = input
+_input = input
 
 
 def oauth2_dance(consumer_key, consumer_secret, token_filename=None):

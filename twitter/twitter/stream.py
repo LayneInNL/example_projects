@@ -10,17 +10,13 @@ except ImportError:
 else:
     _HAVE_SSL = True
 
-if PY_3_OR_HIGHER:
-    import urllib.request as urllib_request
-    import urllib.error as urllib_error
-else:
-    import urllib2 as urllib_request
-    import urllib2 as urllib_error
+import urllib.request as urllib_request
+import urllib.error as urllib_error
 import json
 from ssl import SSLError
 import socket
 import codecs
-import sys, select, time
+import select, time
 
 from .api import TwitterCall, wrap_response, TwitterHTTPError
 
