@@ -500,17 +500,11 @@ class MmapByteArray(object):
 # the key with its bits reversed.
 BYTE_REVERSAL_DICT = dict()
 
-# For Python 2.7/ 3.x coexistence
-# Yes this is very very hacky.
-if sys.version_info[0] == 2:
-    for i in range(256):
-        BYTE_REVERSAL_DICT[i] = chr(int("{0:08b}".format(i)[::-1], 2))
-else:
-    for i in range(256):
-        BYTE_REVERSAL_DICT[i] = bytes([int("{0:08b}".format(i)[::-1], 2)])
-    from io import IOBase as file
-    xrange = range
-    basestring = str
+for i in range(256):
+    BYTE_REVERSAL_DICT[i] = bytes([int("{0:08b}".format(i)[::-1], 2)])
+from io import IOBase as file
+xrange = range
+basestring = str
 
 # Python 2.x octals start with '0', in Python 3 it's '0o'
 LEADING_OCT_CHARS = len(oct(1)) - 1
