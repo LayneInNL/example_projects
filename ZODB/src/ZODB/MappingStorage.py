@@ -347,7 +347,7 @@ class TransactionRecord(object):
         self.data = data
 
     _extension = property(lambda self: self.extension,
-                          lambda self, v: setattr(self, 'extension', v),
+                          lambda self, v: setattr(self, 'extension', v), None
                           )
 
     def __iter__(self):

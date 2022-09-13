@@ -102,9 +102,9 @@ class AbstractConnectionPool(object):
     def getTimeout(self):
         return self._timeout
 
-    timeout = property(getTimeout, lambda self, v: self.setTimeout(v))
+    timeout = property(getTimeout, lambda self, v: self.setTimeout(v), None)
 
-    size = property(getSize, lambda self, v: self.setSize(v))
+    size = property(getSize, lambda self, v: self.setSize(v), None)
 
     def clear(self):
         pass

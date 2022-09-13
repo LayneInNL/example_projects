@@ -2940,77 +2940,31 @@ class Bits(object):
         _readintne = _readintbe
         _getintne = _getintbe
 
-    _offset = property(_getoffset)
+    _offset = property(_getoffset, None, None, None)
 
-    len = property(_getlength,
-                   doc="""The length of the bitstring in bits. Read only.
-                      """)
-    length = property(_getlength,
-                      doc="""The length of the bitstring in bits. Read only.
-                      """)
-    bool = property(_getbool,
-                    doc="""The bitstring as a bool (True or False). Read only.
-                    """)
-    hex = property(_gethex,
-                   doc="""The bitstring as a hexadecimal string. Read only.
-                   """)
-    bin = property(_getbin,
-                   doc="""The bitstring as a binary string. Read only.
-                   """)
-    oct = property(_getoct,
-                   doc="""The bitstring as an octal string. Read only.
-                   """)
-    bytes = property(_getbytes,
-                     doc="""The bitstring as a bytes object. Read only.
-                      """)
-    int = property(_getint,
-                   doc="""The bitstring as a two's complement signed int. Read only.
-                      """)
-    uint = property(_getuint,
-                    doc="""The bitstring as a two's complement unsigned int. Read only.
-                      """)
-    float = property(_getfloat,
-                     doc="""The bitstring as a floating point number. Read only.
-                      """)
-    intbe = property(_getintbe,
-                     doc="""The bitstring as a two's complement big-endian signed int. Read only.
-                      """)
-    uintbe = property(_getuintbe,
-                      doc="""The bitstring as a two's complement big-endian unsigned int. Read only.
-                      """)
-    floatbe = property(_getfloat,
-                       doc="""The bitstring as a big-endian floating point number. Read only.
-                      """)
-    intle = property(_getintle,
-                     doc="""The bitstring as a two's complement little-endian signed int. Read only.
-                      """)
-    uintle = property(_getuintle,
-                      doc="""The bitstring as a two's complement little-endian unsigned int. Read only.
-                      """)
-    floatle = property(_getfloatle,
-                       doc="""The bitstring as a little-endian floating point number. Read only.
-                      """)
-    intne = property(_getintne,
-                     doc="""The bitstring as a two's complement native-endian signed int. Read only.
-                      """)
-    uintne = property(_getuintne,
-                      doc="""The bitstring as a two's complement native-endian unsigned int. Read only.
-                      """)
-    floatne = property(_getfloatne,
-                       doc="""The bitstring as a native-endian floating point number. Read only.
-                      """)
-    ue = property(_getue,
-                  doc="""The bitstring as an unsigned exponential-Golomb code. Read only.
-                      """)
-    se = property(_getse,
-                  doc="""The bitstring as a signed exponential-Golomb code. Read only.
-                      """)
-    uie = property(_getuie,
-                   doc="""The bitstring as an unsigned interleaved exponential-Golomb code. Read only.
-                      """)
-    sie = property(_getsie,
-                   doc="""The bitstring as a signed interleaved exponential-Golomb code. Read only.
-                      """)
+    len = property(_getlength, None, None, "doc")
+    length = property(_getlength, None, None, "doc")
+    bool = property(_getbool, None, None, "doc")
+    hex = property(_gethex, None, None, "doc")
+    bin = property(_getbin, None, None, "doc")
+    oct = property(_getoct, None, None, "doc")
+    bytes = property(_getbytes, None, None, "doc")
+    int = property(_getint, None, None, "doc")
+    uint = property(_getuint, None, None, "doc")
+    float = property(_getfloat, None, None, "doc")
+    intbe = property(_getintbe, None, None, "doc")
+    uintbe = property(_getuintbe, None, None, "doc")
+    floatbe = property(_getfloat, None, None, "doc")
+    intle = property(_getintle, None, None, "doc")
+    uintle = property(_getuintle, None, None, "doc")
+    floatle = property(_getfloatle, None, None, "doc")
+    intne = property(_getintne, None, None, "doc")
+    uintne = property(_getuintne, None, None, "doc")
+    floatne = property(_getfloatne, None, None, "doc")
+    ue = property(_getue, None, None, "doc")
+    se = property(_getse, None, None, "doc")
+    uie = property(_getuie, None, None, "doc")
+    sie = property(_getsie, None, None, "doc")
 
 
 
@@ -3698,69 +3652,27 @@ class BitArray(Bits):
         """Return a copy of the bitstring."""
         return self._copy()
 
-    int = property(Bits._getint, Bits._setint,
-                   doc="""The bitstring as a two's complement signed int. Read and write.
-                      """)
-    uint = property(Bits._getuint, Bits._setuint,
-                    doc="""The bitstring as a two's complement unsigned int. Read and write.
-                      """)
-    float = property(Bits._getfloat, Bits._setfloat,
-                     doc="""The bitstring as a floating point number. Read and write.
-                      """)
-    intbe = property(Bits._getintbe, Bits._setintbe,
-                     doc="""The bitstring as a two's complement big-endian signed int. Read and write.
-                      """)
-    uintbe = property(Bits._getuintbe, Bits._setuintbe,
-                      doc="""The bitstring as a two's complement big-endian unsigned int. Read and write.
-                      """)
-    floatbe = property(Bits._getfloat, Bits._setfloat,
-                       doc="""The bitstring as a big-endian floating point number. Read and write.
-                      """)
-    intle = property(Bits._getintle, Bits._setintle,
-                     doc="""The bitstring as a two's complement little-endian signed int. Read and write.
-                      """)
-    uintle = property(Bits._getuintle, Bits._setuintle,
-                      doc="""The bitstring as a two's complement little-endian unsigned int. Read and write.
-                      """)
-    floatle = property(Bits._getfloatle, Bits._setfloatle,
-                       doc="""The bitstring as a little-endian floating point number. Read and write.
-                      """)
-    intne = property(Bits._getintne, Bits._setintne,
-                     doc="""The bitstring as a two's complement native-endian signed int. Read and write.
-                      """)
-    uintne = property(Bits._getuintne, Bits._setuintne,
-                      doc="""The bitstring as a two's complement native-endian unsigned int. Read and write.
-                      """)
-    floatne = property(Bits._getfloatne, Bits._setfloatne,
-                       doc="""The bitstring as a native-endian floating point number. Read and write.
-                      """)
-    ue = property(Bits._getue, Bits._setue,
-                  doc="""The bitstring as an unsigned exponential-Golomb code. Read and write.
-                      """)
-    se = property(Bits._getse, Bits._setse,
-                  doc="""The bitstring as a signed exponential-Golomb code. Read and write.
-                      """)
-    uie = property(Bits._getuie, Bits._setuie,
-                  doc="""The bitstring as an unsigned interleaved exponential-Golomb code. Read and write.
-                      """)
-    sie = property(Bits._getsie, Bits._setsie,
-                  doc="""The bitstring as a signed interleaved exponential-Golomb code. Read and write.
-                      """)
-    hex = property(Bits._gethex, Bits._sethex,
-                   doc="""The bitstring as a hexadecimal string. Read and write.
-                       """)
-    bin = property(Bits._getbin, Bits._setbin_safe,
-                   doc="""The bitstring as a binary string. Read and write.
-                       """)
-    oct = property(Bits._getoct, Bits._setoct,
-                   doc="""The bitstring as an octal string. Read and write.
-                       """)
-    bool = property(Bits._getbool, Bits._setbool,
-                    doc="""The bitstring as a bool (True or False). Read and write.
-                    """)
-    bytes = property(Bits._getbytes, Bits._setbytes_safe,
-                     doc="""The bitstring as a ordinary string. Read and write.
-                      """)
+    int = property(Bits._getint, Bits._setint, None, "doc")
+    uint = property(Bits._getuint, Bits._setuint, None, "doc")
+    float = property(Bits._getfloat, Bits._setfloat, None, "doc")
+    intbe = property(Bits._getintbe, Bits._setintbe, None, "doc")
+    uintbe = property(Bits._getuintbe, Bits._setuintbe, None, "doc")
+    floatbe = property(Bits._getfloat, Bits._setfloat, None, "doc")
+    intle = property(Bits._getintle, Bits._setintle, None, "doc")
+    uintle = property(Bits._getuintle, Bits._setuintle, None, "doc")
+    floatle = property(Bits._getfloatle, Bits._setfloatle, None, "doc")
+    intne = property(Bits._getintne, Bits._setintne, None, "doc")
+    uintne = property(Bits._getuintne, Bits._setuintne, None, "doc")
+    floatne = property(Bits._getfloatne, Bits._setfloatne, None, "doc")
+    ue = property(Bits._getue, Bits._setue, None, "doc")
+    se = property(Bits._getse, Bits._setse, None, "doc")
+    uie = property(Bits._getuie, Bits._setuie, None, "doc")
+    sie = property(Bits._getsie, Bits._setsie, None, "doc")
+    hex = property(Bits._gethex, Bits._sethex, None, "doc")
+    bin = property(Bits._getbin, Bits._setbin_safe, None, "doc")
+    oct = property(Bits._getoct, Bits._setoct, None, "doc")
+    bool = property(Bits._getbool, Bits._setbool, None, "doc")
+    bytes = property(Bits._getbytes, Bits._setbytes_safe, None, "doc")
 
 
 
@@ -4078,15 +3990,9 @@ class ConstBitStream(Bits):
         assert self._assertsanity()
         return skipped
 
-    pos = property(_getbitpos, _setbitpos,
-                   doc="""The position in the bitstring in bits. Read and write.
-                      """)
-    bitpos = property(_getbitpos, _setbitpos,
-                      doc="""The position in the bitstring in bits. Read and write.
-                      """)
-    bytepos = property(_getbytepos, _setbytepos,
-                       doc="""The position in the bitstring in bytes. Read and write.
-                      """)
+    pos = property(_getbitpos, _setbitpos, None, "doc")
+    bitpos = property(_getbitpos, _setbitpos, None, "doc")
+    bytepos = property(_getbytepos, _setbytepos, None, "doc")
 
 
 class BitStream(ConstBitStream, BitArray):
