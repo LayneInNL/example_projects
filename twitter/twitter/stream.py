@@ -1,8 +1,6 @@
 # encoding: utf-8
 from __future__ import unicode_literals
 
-from .util import PY_3_OR_HIGHER
-
 try:
     import ssl
 except ImportError:
@@ -164,7 +162,7 @@ class TwitterJSONIter(object):
         timeouts = [t for t in (self.timeout, self.heartbeat_timeout, MAX_SOCK_TIMEOUT)
                     if t is not None]
         sock_timeout = min(*timeouts)
-        sock = self.handle.fp.raw._sock if PY_3_OR_HIGHER else self.handle.fp._sock.fp._sock
+        sock = self.handle.fp.raw._sock
         sock.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1)
         headers = self.handle.headers
         sock_reader = SockReader(sock, sock_timeout)

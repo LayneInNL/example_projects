@@ -870,7 +870,7 @@ class PDFPageInterpreter:
                 method = 'do_%s' % name.replace('*', '_a').replace('"', '_w').replace("'", '_q')
                 if hasattr(self, method):
                     func = getattr(self, method)
-                    nargs = func.__code__.co_argcount-1
+                    nargs = 1
                     if nargs:
                         args = self.pop(nargs)
                         if self.debug:

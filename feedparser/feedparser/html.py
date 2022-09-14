@@ -118,13 +118,13 @@ class BaseHTMLProcessor(sgmllib.SGMLParser):
         raise NotImplementedError
 
     # Replace goahead with SGMLParser's goahead() code object.
-    goahead.__code__ = sgmllib.SGMLParser.goahead.__code__
+    goahead = sgmllib
 
     def __parse_starttag(self, i):
         raise NotImplementedError
 
     # Replace __parse_starttag with SGMLParser's parse_starttag() code object.
-    __parse_starttag.__code__ = sgmllib.SGMLParser.parse_starttag.__code__
+    __parse_starttag = sgmllib
 
     def parse_starttag(self, i):
         j = self.__parse_starttag(i)
