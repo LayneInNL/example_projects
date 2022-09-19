@@ -19,60 +19,42 @@ IS_JYTHON = sys.platform.startswith('java')
 
 _protocol = 3
 
-if not PY3:
-    # Python 2.x
-    # PyPy's cPickle doesn't have noload, and noload is broken in Python 2.7,
-    # so we need zodbpickle.
-    # Get the fastest working version we can (PyPy has no fastpickle)
-    try:
-        import zodbpickle.fastpickle as cPickle
-    except ImportError:
-        import zodbpickle.pickle as cPickle
-    Pickler = cPickle.Pickler
-    Unpickler = cPickle.Unpickler
-    dump = cPickle.dump
-    dumps = cPickle.dumps
-    loads = cPickle.loads
-    HIGHEST_PROTOCOL = cPickle.HIGHEST_PROTOCOL
-    IMPORT_MAPPING = {}
-    NAME_MAPPING = {}
-    FILESTORAGE_MAGIC = b"FS21"
-else:
-    # Python 3.x: can't use stdlib's pickle because
-    # http://bugs.python.org/issue6784
-    import zodbpickle.pickle
-    HIGHEST_PROTOCOL = 3
-    from _compat_pickle import IMPORT_MAPPING  # noqa: F401 import unused
-    from _compat_pickle import NAME_MAPPING  # noqa: F401 import unused
 
-    class Pickler(zodbpickle.pickle.Pickler):
-        def __init__(self, f, protocol=None):
-            super(Pickler, self).__init__(f, protocol)
 
-    class Unpickler(zodbpickle.pickle.Unpickler):
-        def __init__(self, f):
-            super(Unpickler, self).__init__(f)
+# Python 3.x: can't use stdlib's pickle because
+# http://bugs.python.org/issue6784
+import zodbpickle.pickle
+HIGHEST_PROTOCOL = 3
+from _compat_pickle import IMPORT_MAPPING  # noqa: F401 import unused
+from _compat_pickle import NAME_MAPPING  # noqa: F401 import unused
 
-        # Py3: Python 3 doesn't allow assignments to find_global,
-        # instead, find_class can be overridden
+class Pickler(zodbpickle.pickle.Pickler):
+    def __init__(self, f, protocol=None):
+        super(Pickler, self).__init__(f, protocol)
 
-        find_global = None
+class Unpickler(zodbpickle.pickle.Unpickler):
+    def __init__(self, f):
+        super(Unpickler, self).__init__(f)
 
-        def find_class(self, modulename, name):
-            if self.find_global is None:
-                return super(Unpickler, self).find_class(modulename, name)
-            return self.find_global(modulename, name)
+    # Py3: Python 3 doesn't allow assignments to find_global,
+    # instead, find_class can be overridden
 
-    def dump(o, f, protocol=None):
-        return zodbpickle.pickle.dump(o, f, protocol)
+    find_global = None
 
-    def dumps(o, protocol=None):
-        return zodbpickle.pickle.dumps(o, protocol)
+    def find_class(self, modulename, name):
+        if self.find_global is None:
+            return super(Unpickler, self).find_class(modulename, name)
+        return self.find_global(modulename, name)
 
-    def loads(s):
-        return zodbpickle.pickle.loads(s, encoding='ASCII', errors='bytes')
-    FILESTORAGE_MAGIC = b"FS30"
+def dump(o, f, protocol=None):
+    return zodbpickle.pickle.dump(o, f, protocol)
 
+def dumps(o, protocol=None):
+    return zodbpickle.pickle.dumps(o, protocol)
+
+def loads(s):
+    return zodbpickle.pickle.loads(s, encoding='ASCII', errors='bytes')
+FILESTORAGE_MAGIC = b"FS30"
 
 def PersistentPickler(persistent_id, *args, **kwargs):
     """
@@ -116,21 +98,12 @@ def PersistentUnpickler(find_global, load_persistent, *args, **kwargs):
     return unpickler
 
 
-try:
-    # XXX: why not just import BytesIO from io?
-    from cStringIO import StringIO as BytesIO
-except ImportError:
-    # Python 3.x
-    from io import BytesIO  # noqa: F401 import unused
+from io import BytesIO  # noqa: F401 import unused
 
 
-try:
-    # Python 3.x
-    from base64 import decodebytes, encodebytes
-except ImportError:
-    # Python 2.x
-    from base64 import decodestring as decodebytes  # noqa: F401 import unused
-    from base64 import encodestring as encodebytes  # noqa: F401 import unused
+# Python 3.x
+from base64 import decodebytes, encodebytes
+
 
 
 # Python 3.x: ``hasattr()`` swallows only AttributeError.
@@ -142,21 +115,12 @@ def py2_hasattr(obj, name):
     return True
 
 
-try:
-    # Py2: simply reexport the builtin
-    long = long
-except NameError:
-    # Py3
-    long = int
-    INT_TYPES = (int,)
-else:
-    INT_TYPES = (int, long)
 
+# Py3
+long = int
+INT_TYPES = (int,)
 
-try:
-    TEXT = unicode
-except NameError:  # pragma NO COVER Py3k
-    TEXT = str
+TEXT = str
 
 
 def ascii_bytes(x):
