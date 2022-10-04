@@ -107,7 +107,7 @@ def _upper_header_keys(headers):
     return new_headers
 
 
-class Notification(object):
+class Notification:
     """A Notification from a Channel.
 
     Notifications are not usually constructed directly, but are returned
@@ -138,7 +138,7 @@ class Notification(object):
         self.resource_id = resource_id
 
 
-class Channel(object):
+class Channel:
     """A Channel for notifications.
 
     Usually not constructed directly, instead it is returned from helper

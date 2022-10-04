@@ -74,7 +74,7 @@ def positional(max_positional_args):
     When defining instance or class methods always remember to account for
     ``self`` and ``cls``::
 
-        class MyClass(object):
+        class MyClass:
 
             @positional(2)
             def my_method(self, pos1, kwonly1=None):

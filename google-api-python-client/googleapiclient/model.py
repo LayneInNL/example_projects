@@ -43,7 +43,7 @@ def _abstract():
     raise NotImplementedError("You need to override this function")
 
 
-class Model(object):
+class Model:
     """Model base class.
 
     All Model classes should implement this interface.

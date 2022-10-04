@@ -229,7 +229,7 @@ def _retry_request(
     return resp, content
 
 
-class MediaUploadProgress(object):
+class MediaUploadProgress:
     """Status of a resumable upload."""
 
     def __init__(self, resumable_progress, total_size):
@@ -256,7 +256,7 @@ class MediaUploadProgress(object):
             return 0.0
 
 
-class MediaDownloadProgress(object):
+class MediaDownloadProgress:
     """Status of a resumable download."""
 
     def __init__(self, resumable_progress, total_size):
@@ -282,7 +282,7 @@ class MediaDownloadProgress(object):
             return 0.0
 
 
-class MediaUpload(object):
+class MediaUpload:
     """Describes a media object to upload.
 
     Base class that defines the interface of MediaUpload subclasses.
@@ -661,7 +661,7 @@ class MediaInMemoryUpload(MediaIoBaseUpload):
         )
 
 
-class MediaIoBaseDownload(object):
+class MediaIoBaseDownload:
     """ "Download media resources.
 
     Note that the Python file object is compatible with io.Base and can be used
@@ -780,7 +780,7 @@ class MediaIoBaseDownload(object):
         raise HttpError(resp, content, uri=self._uri)
 
 
-class _StreamSlice(object):
+class _StreamSlice:
     """Truncated stream.
 
     Takes a stream and presents a stream that is a slice of the original stream.
@@ -820,7 +820,7 @@ class _StreamSlice(object):
         return self._stream.read(n)
 
 
-class HttpRequest(object):
+class HttpRequest:
     """Encapsulates a single HTTP request."""
 
     @util.positional(4)
@@ -1162,7 +1162,7 @@ class HttpRequest(object):
         return resp, contents
 
 
-class BatchHttpRequest(object):
+class BatchHttpRequest:
     """Batches multiple HttpRequest objects into a single HTTP request.
 
     Example:
@@ -1606,7 +1606,7 @@ class BatchHttpRequest(object):
                 self._callback(request_id, response, exception)
 
 
-class HttpRequestMock(object):
+class HttpRequestMock:
     """Mock of HttpRequest.
 
     Do not construct directly, instead use RequestMockBuilder.
@@ -1638,7 +1638,7 @@ class HttpRequestMock(object):
         return self.postproc(self.resp, self.content)
 
 
-class RequestMockBuilder(object):
+class RequestMockBuilder:
     """A simple mock of HttpRequest
 
     Pass in a dictionary to the constructor that maps request methodIds to
@@ -1720,7 +1720,7 @@ class RequestMockBuilder(object):
             return HttpRequestMock(None, "{}", model.response)
 
 
-class HttpMock(object):
+class HttpMock:
     """Mock of httplib2.Http"""
 
     def __init__(self, filename=None, headers=None):
@@ -1762,7 +1762,7 @@ class HttpMock(object):
         return None
 
 
-class HttpMockSequence(object):
+class HttpMockSequence:
     """Mock of httplib2.Http
 
     Mocks a sequence of calls to request returning different responses for each

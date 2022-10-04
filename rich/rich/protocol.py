@@ -20,7 +20,7 @@ def rich_cast(renderable: object) -> "RenderableType":
     """Cast an object to a renderable by calling __rich__ if present.
 
     Args:
-        renderable (object): A potentially renderable object
+        renderable: A potentially renderable object
 
     Returns:
         object: The result of recursively calling __rich__.

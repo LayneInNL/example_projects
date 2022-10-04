@@ -76,7 +76,7 @@ def _is_dataclass_repr(obj: object) -> bool:
     """Check if an instance of a dataclass contains the default repr.
 
     Args:
-        obj (object): A dataclass instance.
+        obj: A dataclass instance.
 
     Returns:
         bool: True if the default repr is used, False if there is a custom repr.
@@ -93,7 +93,7 @@ def _has_default_namedtuple_repr(obj: object) -> bool:
     """Check if an instance of namedtuple contains the default repr
 
     Args:
-        obj (object): A namedtuple
+        obj: A namedtuple
 
     Returns:
         bool: True if the default repr is used, False if there's a custom repr.

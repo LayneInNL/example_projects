@@ -32,7 +32,7 @@ from __future__ import generator_stop
 from ..util import FeedParserDict
 
 
-class Namespace(object):
+class Namespace:
     supported_namespaces = {
         'http://www.w3.org/2003/01/geo/wgs84_pos#': 'geo',
         'http://www.georss.org/georss': 'georss',

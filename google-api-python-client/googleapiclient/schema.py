@@ -68,7 +68,7 @@ from collections import OrderedDict
 from googleapiclient import _helpers as util
 
 
-class Schemas(object):
+class Schemas:
     """Schemas for an API."""
 
     def __init__(self, discovery):
@@ -167,7 +167,7 @@ class Schemas(object):
         return self.schemas.get(name, default)
 
 
-class _SchemaToStruct(object):
+class _SchemaToStruct:
     """Convert schema to a prototype object."""
 
     @util.positional(3)

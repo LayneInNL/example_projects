@@ -29,7 +29,7 @@ class DocoptExit(SystemExit):
         SystemExit.__init__(self, (message + '\n' + self.usage).strip())
 
 
-class Pattern(object):
+class Pattern:
 
     def __eq__(self, other):
         return repr(self) == repr(other)

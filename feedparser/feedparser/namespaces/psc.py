@@ -32,7 +32,7 @@ import re
 from .. import util
 
 
-class Namespace(object):
+class Namespace:
     supported_namespaces = {
         'http://podlove.org/simple-chapters': 'psc',
     }

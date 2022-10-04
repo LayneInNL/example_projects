@@ -905,7 +905,7 @@ def _urljoin(base, url):
 
 
 # TODO(dhermes): Convert this class to ResourceMethod and make it callable
-class ResourceMethodParameters(object):
+class ResourceMethodParameters:
     """Represents the parameters associated with a method.
 
     Attributes:
@@ -1315,7 +1315,7 @@ def createNextMethod(
     return (methodName, methodNext)
 
 
-class Resource(object):
+class Resource:
     """A class for interacting with a resource."""
 
     def __init__(
