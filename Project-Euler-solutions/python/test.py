@@ -1,6 +1,6 @@
-# import eulerlib111
+# import eulerlib.eulerlib111
 
-# ans = eulerlib111.test()
+# ans = eulerlib.eulerlib111.test()
 
 
 # a = 1
