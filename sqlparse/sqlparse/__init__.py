@@ -8,12 +8,12 @@
 """Parse SQL statements."""
 
 # Setup namespace
-from sqlparse import sql
-from sqlparse import cli
+# from sqlparse import sql
+# from sqlparse import cli
 from sqlparse import engine
-from sqlparse import tokens
-from sqlparse import filters
-from sqlparse import formatter
+# from sqlparse import tokens
+# from sqlparse import filters
+# from sqlparse import formatter
 
 
 __version__ = '0.4.4.dev0'
@@ -42,29 +42,29 @@ def parsestream(stream, encoding=None):
     return stack.run(stream, encoding)
 
 
-def format(sql, encoding=None, **options):
-    """Format *sql* according to *options*.
+# def format(sql, encoding=None, **options):
+#     """Format *sql* according to *options*.
 
-    Available options are documented in :ref:`formatting`.
+#     Available options are documented in :ref:`formatting`.
 
-    In addition to the formatting options this function accepts the
-    keyword "encoding" which determines the encoding of the statement.
+#     In addition to the formatting options this function accepts the
+#     keyword "encoding" which determines the encoding of the statement.
 
-    :returns: The formatted SQL statement as string.
-    """
-    stack = engine.FilterStack()
-    options = formatter.validate_options(options)
-    stack = formatter.build_filter_stack(stack, options)
-    stack.postprocess.append(filters.SerializerUnicode())
-    return ''.join(stack.run(sql, encoding))
+#     :returns: The formatted SQL statement as string.
+#     """
+#     stack = engine.FilterStack()
+#     options = formatter.validate_options(options)
+#     stack = formatter.build_filter_stack(stack, options)
+#     stack.postprocess.append(filters.SerializerUnicode())
+#     return ''.join(stack.run(sql, encoding))
 
 
-def split(sql, encoding=None):
-    """Split *sql* into single statements.
+# def split(sql, encoding=None):
+#     """Split *sql* into single statements.
 
-    :param sql: A string containing one or more SQL statements.
-    :param encoding: The encoding of the statement (optional).
-    :returns: A list of strings.
-    """
-    stack = engine.FilterStack()
-    return [str(stmt).strip() for stmt in stack.run(sql, encoding)]
+#     :param sql: A string containing one or more SQL statements.
+#     :param encoding: The encoding of the statement (optional).
+#     :returns: A list of strings.
+#     """
+#     stack = engine.FilterStack()
+#     return [str(stmt).strip() for stmt in stack.run(sql, encoding)]

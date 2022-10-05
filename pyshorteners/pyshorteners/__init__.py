@@ -9,7 +9,7 @@ __email__ = "ellisonleao@gmail.com"
 __license__ = "GPLv3"
 
 
-class Shortener(object):
+class Shortener:
     """Base Factory class to create shoreteners instances
 
     >>> s = Shortener(**kwargs)
